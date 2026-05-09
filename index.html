@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Arely Sarai XV | Invytia Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -24,10 +24,9 @@
             color: #F3E5AB; 
             margin: 0; 
             overflow-x: hidden;
-            min-height: 100vh;
+            width: 100%;
         }
 
-        /* DISEÑO FLUIDO: Fondo con degradados de luz */
         .bg-lux {
             background: radial-gradient(circle at 50% -10%, var(--vino-base) 0%, transparent 50%),
                         radial-gradient(circle at 10% 40%, var(--vino-profundo) 0%, transparent 40%),
@@ -37,16 +36,16 @@
 
         .font-name { font-family: 'Playfair Display', serif; }
         
-        /* FIX FUENTE CURSIVA: Evita que se corten los trazos largos */
         .font-cursive { 
             font-family: 'Great Vibes', cursive; 
-            line-height: 1.4 !important;
-            padding: 0.25em 0.2em; 
+            line-height: 1.2 !important;
+            padding: 0.3em 0.2em; 
             display: inline-block;
             overflow: visible !important;
+            word-break: break-word;
         }
 
-        /* ANIMACIÓN GLITTER (DESTELLOS) */
+        /* GLITTER OPTIMIZADO PARA MÓVIL */
         .glitter-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1;
@@ -54,11 +53,10 @@
         .glitter-layer {
             position: absolute; inset: 0;
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23FFDF73' opacity='0.4'/%3E%3Ccircle cx='150' cy='50' r='0.8' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='80' cy='180' r='1.2' fill='%23D4AF37' opacity='0.5'/%3E%3C/svg%3E");
-            animation: moveGlitter 20s linear infinite;
+            animation: moveGlitter 30s linear infinite;
         }
         @keyframes moveGlitter { from { transform: translateY(0); } to { transform: translateY(-200px); } }
 
-        /* SHIMMER TEXT (BRILLO ORO) */
         .shimmer {
             background: linear-gradient(90deg, var(--dorado) 0%, var(--dorado-brillante) 50%, var(--dorado) 100%);
             background-size: 200% auto;
@@ -68,22 +66,21 @@
         }
         @keyframes shine { to { background-position: 200% center; } }
 
-        /* LIQUID GLASS (CRISTAL LÍQUIDO) */
         .liquid-glass {
-            background: rgba(91, 14, 35, 0.1);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border-radius: 30px;
+            background: rgba(91, 14, 35, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            border-radius: 24px;
         }
 
-        /* SOBRE PREMIUM - FONDO BLANCO */
+        /* SOBRE RESPONSIVO */
         #opening-overlay { background-color: var(--blanco-perla); z-index: 100; }
-        #envelope-wrapper { perspective: 1200px; }
+        #envelope-wrapper { perspective: 1200px; width: 100%; display: flex; justify-content: center; }
         #envelope {
-            width: 330px; height: 220px; 
-            background: var(--vino-profundo); /* Tono vino oscuro */
+            width: 300px; max-width: 90vw; height: 200px; 
+            background: var(--vino-profundo);
             position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.15), inset 0 0 30px rgba(0,0,0,0.5); 
             border-radius: 0 0 10px 10px;
@@ -92,220 +89,196 @@
         }
         #flap {
             position: absolute; top: 0; left: 0; width: 0; height: 0;
-            border-left: 165px solid transparent; border-right: 165px solid transparent;
-            border-top: 105px solid var(--vino-base); /* Tono vino vibrante */
+            border-left: 150px solid transparent; border-right: 150px solid transparent;
+            border-top: 100px solid var(--vino-base); 
             transform-origin: top;
             transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 3;
         }
+        @media (max-width: 350px) {
+            #envelope { width: 260px; height: 180px; }
+            #flap { border-left-width: 130px; border-right-width: 130px; border-top-width: 90px; }
+        }
         #seal {
             position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
-            width: 45px; height: 45px; 
+            width: 40px; height: 40px; 
             background: radial-gradient(circle, var(--dorado-brillante) 0%, var(--dorado) 100%);
             border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.5);
             z-index: 4; display: flex; align-items: center; justify-content: center;
             color: var(--vino-negro); font-family: 'Playfair Display', serif; font-weight: bold;
-            transition: opacity 0.4s;
         }
         .open #flap { transform: rotateX(180deg); }
-        .open #seal { opacity: 0; }
+        .open #seal { opacity: 0; pointer-events: none; }
 
-        /* SEPARADORES DE LUJO */
         .premium-divider {
-            width: 1px; height: 100px;
+            width: 1px; height: 60px;
             background: linear-gradient(to bottom, transparent, var(--dorado), transparent);
-            margin: 3rem auto;
-            opacity: 0.6;
+            margin: 2rem auto;
+            opacity: 0.5;
         }
 
-        /* BOTONES Y FORMS */
-        .btn-premium {
-            background: var(--dorado);
-            color: var(--vino-negro);
-            padding: 1rem 2.5rem;
-            border-radius: 50px;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            font-size: 10px;
-            transition: all 0.4s;
-            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
-        }
-        .btn-premium:hover {
-            background: var(--dorado-brillante);
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.4);
-        }
         .input-premium {
-            background: transparent;
-            border: none;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 1rem 0.5rem;
-            width: 100%;
-            color: var(--dorado-light);
-            outline: none;
-            transition: border-color 0.4s;
-            text-align: center;
+            background: transparent; border: none; border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 0.8rem 0; width: 100%; color: var(--dorado-light); outline: none; text-align: center;
+            border-radius: 0; -webkit-appearance: none;
         }
-        .input-premium:focus { border-color: var(--dorado-brillante); }
     </style>
 </head>
-<body class="overflow-hidden">
+<body>
 
     <div class="glitter-container"><div class="glitter-layer"></div></div>
-
     <audio id="invite-music" loop><source src="assets/song.mp3" type="audio/mpeg"></audio>
 
     <div id="opening-overlay" class="fixed inset-0 flex flex-col items-center justify-center transition-opacity duration-1000">
         <div id="envelope-wrapper">
             <div id="envelope">
                 <div id="flap"><div id="seal">XV</div></div>
-                <div class="relative z-1 text-center pt-10">
-                    <p class="font-cursive text-3xl text-[#D4AF37]">Mis XV Años</p>
-                    <h2 class="font-cursive text-5xl text-white shimmer">Arely Sarai</h2>
+                <div class="relative z-1 text-center pt-8">
+                    <p class="font-cursive text-2xl text-[#D4AF37]">Mis XV Años</p>
+                    <h2 class="font-cursive text-4xl text-white shimmer">Arely Sarai</h2>
                 </div>
             </div>
         </div>
-        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-16 px-12 py-4 bg-transparent text-[--vino-profundo] border border-[--vino-profundo] rounded-full font-bold tracking-[0.4em] text-[10px] hover:bg-[--vino-profundo] hover:text-white transition-all duration-500">
+        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-16 px-10 py-4 bg-transparent text-[--vino-profundo] border border-[--vino-profundo] rounded-full font-bold tracking-[0.3em] text-[10px] active:scale-95 transition-all">
             ABRIR INVITACIÓN
         </button>
     </div>
 
     <main id="main-content" class="hidden opacity-0 transition-opacity duration-1000 bg-lux">
         
-        <section class="h-screen w-full flex flex-col items-center justify-end pb-24 relative">
+        <section class="min-h-screen w-full flex flex-col items-center justify-end pb-20 relative">
             <div class="absolute inset-0">
                 <img src="assets/hero.jpg" alt="Arely Sarai" class="w-full h-full object-cover opacity-60">
                 <div class="absolute inset-0 bg-gradient-to-t from-[--vino-negro] via-transparent to-transparent"></div>
             </div>
-            <div class="relative text-center px-6">
-                <p class="font-cursive text-5xl md:text-6xl text-[--dorado-light]">Mis XV Años</p>
-                <h1 class="font-cursive text-8xl md:text-[11rem] shimmer -mt-4">Arely Sarai</h1>
+            <div class="relative text-center px-4 w-full overflow-hidden">
+                <p class="font-cursive text-4xl md:text-6xl text-[--dorado-light]">Mis XV Años</p>
+                <h1 class="font-cursive text-6xl sm:text-8xl md:text-[10rem] shimmer -mt-2">Arely Sarai</h1>
             </div>
         </section>
 
         <div class="max-w-4xl mx-auto px-6">
             
-            <section class="py-12 flex justify-center gap-6 md:gap-16">
-                <div class="text-center">
-                    <span id="days" class="font-name text-4xl md:text-6xl shimmer">00</span>
-                    <p class="text-[9px] uppercase tracking-[0.4em] mt-2 opacity-60">Días</p>
+            <section class="py-10 flex justify-center gap-4 md:gap-16">
+                <div class="text-center min-w-[60px]">
+                    <span id="days" class="font-name text-3xl md:text-6xl shimmer">00</span>
+                    <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Días</p>
                 </div>
-                <div class="text-center">
-                    <span id="hours" class="font-name text-4xl md:text-6xl shimmer">00</span>
-                    <p class="text-[9px] uppercase tracking-[0.4em] mt-2 opacity-60">Hrs</p>
+                <div class="text-center min-w-[60px]">
+                    <span id="hours" class="font-name text-3xl md:text-6xl shimmer">00</span>
+                    <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Hrs</p>
                 </div>
-                <div class="text-center">
-                    <span id="minutes" class="font-name text-4xl md:text-6xl shimmer">00</span>
-                    <p class="text-[9px] uppercase tracking-[0.4em] mt-2 opacity-60">Min</p>
+                <div class="text-center min-w-[60px]">
+                    <span id="minutes" class="font-name text-3xl md:text-6xl shimmer">00</span>
+                    <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Min</p>
                 </div>
-                <div class="text-center">
-                    <span id="seconds" class="font-name text-4xl md:text-6xl shimmer">00</span>
-                    <p class="text-[9px] uppercase tracking-[0.4em] mt-2 opacity-60">Seg</p>
+                <div class="text-center min-w-[60px]">
+                    <span id="seconds" class="font-name text-3xl md:text-6xl shimmer">00</span>
+                    <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Seg</p>
                 </div>
             </section>
 
             <div class="premium-divider"></div>
 
             <section class="py-10 text-center">
-                <p class="font-cursive text-4xl md:text-6xl text-[--dorado-light] leading-relaxed">
+                <p class="font-cursive text-3xl md:text-6xl text-[--dorado-light] leading-snug">
                     "Hoy mis sueños se visten de fiesta y mi corazón se llena de ilusión"
                 </p>
             </section>
 
-            <section class="py-20 text-center">
-                <p class="uppercase tracking-[0.6em] text-[10px] mb-10 opacity-50">Con la bendición de mis padres</p>
-                <h3 class="font-cursive text-5xl md:text-7xl shimmer">Jesus Simon Vazquez</h3>
-                <p class="font-cursive text-3xl my-2 opacity-30">&</p>
-                <h3 class="font-cursive text-5xl md:text-7xl shimmer">Matilde Velázquez Hernández</h3>
+            <section class="py-16 text-center">
+                <p class="uppercase tracking-[0.5em] text-[9px] mb-8 opacity-50">Con la bendición de mis padres</p>
+                <h3 class="font-cursive text-4xl md:text-7xl shimmer">Jesus Simon Vazquez</h3>
+                <p class="font-cursive text-2xl my-1 opacity-30">&</p>
+                <h3 class="font-cursive text-4xl md:text-7xl shimmer">Matilde Velázquez Hernández</h3>
                 
-                <div class="h-1 w-20 bg-dorado mx-auto my-16 opacity-30"></div>
+                <div class="h-px w-16 bg-dorado mx-auto my-12 opacity-30"></div>
 
-                <p class="uppercase tracking-[0.6em] text-[10px] mb-10 opacity-50">Y mis padrinos</p>
-                <h3 class="font-cursive text-5xl md:text-7xl shimmer">José Luis Oropeza Cruz</h3>
-                <p class="font-cursive text-3xl my-2 opacity-30">&</p>
-                <h3 class="font-cursive text-5xl md:text-7xl shimmer">María Magdalena Velázquez Hernández</h3>
+                <p class="uppercase tracking-[0.5em] text-[9px] mb-8 opacity-50">Y mis padrinos</p>
+                <h3 class="font-cursive text-4xl md:text-7xl shimmer">José Luis Oropeza Cruz</h3>
+                <p class="font-cursive text-2xl my-1 opacity-30">&</p>
+                <h3 class="font-cursive text-4xl md:text-7xl shimmer">María Magdalena Velázquez Hernández</h3>
             </section>
 
             <div class="premium-divider"></div>
 
-            <section class="py-20 text-center">
-                <p class="uppercase tracking-[0.6em] text-[12px] mb-6 opacity-60">Te espero este gran día</p>
-                <h2 class="font-name text-7xl md:text-9xl shimmer">30 de Junio</h2>
+            <section class="py-16 text-center">
+                <p class="uppercase tracking-[0.5em] text-[10px] mb-6 opacity-60">Te espero este gran día</p>
+                <h2 class="font-name text-5xl md:text-9xl shimmer">30 de Junio</h2>
             </section>
 
-            <section class="py-20">
+            <section class="py-10">
                 <div class="liquid-glass overflow-hidden">
-                    <img src="assets/salon.jpg" alt="Samsara" class="w-full h-80 object-cover opacity-80" style="-webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);">
-                    <div class="p-12 text-center">
-                        <h2 class="font-name text-5xl shimmer mb-8">Recepción</h2>
-                        <div class="inline-block border border-[--dorado] px-8 py-2 rounded-full mb-8">
-                            <span class="tracking-[0.4em] text-[11px] font-bold">18:30 HRS</span>
+                    <img src="assets/salon.jpg" alt="Samsara" class="w-full h-64 object-cover opacity-80" style="-webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%);">
+                    <div class="p-8 md:p-12 text-center">
+                        <h2 class="font-name text-4xl md:text-5xl shimmer mb-6">Recepción</h2>
+                        <div class="inline-block border border-[--dorado] px-6 py-2 rounded-full mb-6">
+                            <span class="tracking-[0.3em] text-[10px] font-bold">18:30 HRS</span>
                         </div>
-                        <h3 class="text-xl tracking-[0.3em] uppercase mb-4">Salón Samsara</h3>
-                        <p class="text-sm font-light leading-loose opacity-70 mb-12">
+                        <h3 class="text-lg tracking-[0.2em] uppercase mb-4 text-[--dorado]">Salón Samsara</h3>
+                        <p class="text-xs font-light leading-relaxed opacity-70 mb-10 px-4">
                             Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, <br> 04300 Ciudad de México, CDMX
                         </p>
-                        <div class="flex flex-col md:flex-row gap-6 justify-center">
-                            <a href="https://share.google/czKc1hNzaSql5bSY1" target="_blank" class="btn-premium">Ubicación</a>
-                            <button onclick="copyAddress()" class="px-8 py-4 border border-[--dorado] rounded-full text-[10px] tracking-widest uppercase">Copiar Dirección</button>
+                        <div class="flex flex-col gap-4 items-center">
+                            <a href="https://share.google/czKc1hNzaSql5bSY1" target="_blank" class="w-full max-w-[250px] bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase">Ver Ubicación</a>
+                            <button onclick="copyAddress()" class="w-full max-w-[250px] px-6 py-3 border border-[--dorado] rounded-full text-[9px] tracking-widest uppercase">Copiar Dirección</button>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <section class="py-24 text-center">
-                <h2 class="font-name text-3xl shimmer mb-6 uppercase tracking-widest">Código de Vestimenta</h2>
-                <p class="uppercase tracking-[0.6em] text-sm font-bold mb-4">Formal</p>
-                <p class="italic text-sm opacity-60">Se reserva el color vino para la quinceañera.</p>
+            <section class="py-16 text-center">
+                <h2 class="font-name text-2xl shimmer mb-4 uppercase tracking-widest">Código de Vestimenta</h2>
+                <p class="uppercase tracking-[0.5em] text-xs font-bold mb-3 text-white">Formal</p>
+                <p class="italic text-[11px] opacity-60 px-6">Se reserva el color vino para la quinceañera.</p>
             </section>
 
             <div class="premium-divider"></div>
 
-            <section class="py-20 text-center">
-                <h2 class="font-name text-4xl shimmer mb-16">Sugerencia de Regalos</h2>
-                <div class="flex flex-col md:flex-row gap-12 justify-center mb-20">
-                    <div class="flex-1 p-10 liquid-glass">
-                        <h4 class="font-name text-2xl mb-8">Mesa de Regalos</h4>
-                        <img src="assets/liverpool.png" alt="Liverpool" class="h-8 mx-auto mb-10 opacity-80 invert">
-                        <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank" class="text-[10px] tracking-[0.4em] uppercase border-b border-[--dorado] pb-2">Ver Mesa</a>
+            <section class="py-10 text-center">
+                <h2 class="font-name text-4xl shimmer mb-12">Sugerencia de Regalos</h2>
+                <div class="flex flex-col gap-8 mb-16">
+                    <div class="p-8 liquid-glass">
+                        <h4 class="font-name text-xl mb-6">Mesa de Regalos</h4>
+                        <img src="assets/liverpool.png" alt="Liverpool" class="h-6 mx-auto mb-8 opacity-80 invert">
+                        <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank" class="text-[9px] tracking-[0.3em] uppercase border-b border-[--dorado] pb-1">Ver Mesa</a>
                     </div>
-                    <div class="flex-1 p-10 liquid-glass">
-                        <h4 class="font-name text-2xl mb-8">Lluvia de Sobres</h4>
-                        <p class="text-sm italic font-light leading-relaxed opacity-70">
+                    <div class="p-8 liquid-glass">
+                        <h4 class="font-name text-xl mb-6">Lluvia de Sobres</h4>
+                        <p class="text-xs italic font-light leading-relaxed opacity-70 px-4">
                             "Tu presencia es el mejor regalo. Si deseas obsequiarme algo, consideramos la dinámica de lluvia de sobres."
                         </p>
                     </div>
                 </div>
                 
-                <div class="py-10">
-                    <h3 class="font-name text-2xl mb-10">Comparte tus momentos</h3>
-                    <div class="qr-frame inline-block p-4 border border-[--dorado]/30 rounded-3xl bg-black/20 cursor-pointer" onclick="window.open('https://drive.google.com/drive/folders/1fhfJhPkrdXJq3ZEg2BiGUsRCpxVHyy3L?usp=sharing')">
-                        <svg viewBox="0 0 24 24" fill="white" class="w-20 h-20 opacity-70"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm0-6h2v2h-2v-2zm3 0h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z"/></svg>
+                <div class="py-6">
+                    <h3 class="font-name text-xl mb-8">Comparte tus momentos</h3>
+                    <div class="inline-block p-6 border border-[--dorado]/30 rounded-3xl bg-black/20" onclick="window.open('https://drive.google.com/drive/folders/1fhfJhPkrdXJq3ZEg2BiGUsRCpxVHyy3L?usp=sharing')">
+                        <svg viewBox="0 0 24 24" fill="white" class="w-12 h-12 opacity-70"><path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm0-6h2v2h-2v-2zm3 0h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z"/></svg>
                     </div>
-                    <p class="text-[10px] tracking-[0.4em] uppercase opacity-40 mt-8">Toca para subir fotos y videos</p>
+                    <p class="text-[8px] tracking-[0.3em] uppercase opacity-40 mt-6">Toca para subir fotos y videos</p>
                 </div>
             </section>
 
-            <section class="py-24 max-w-md mx-auto">
-                <h2 class="font-name text-5xl shimmer text-center mb-12">Confirmar</h2>
-                <div class="space-y-8">
+            <section class="py-16 max-w-sm mx-auto text-center">
+                <h2 class="font-name text-4xl shimmer mb-10">Confirmar</h2>
+                <div class="space-y-6">
                     <input type="text" id="rsvp-nombre" placeholder="Nombre completo" class="input-premium">
-                    <select id="rsvp-asistencia" class="input-premium appearance-none cursor-pointer">
+                    <select id="rsvp-asistencia" class="input-premium cursor-pointer">
                         <option value="Confirmado" class="bg-black">Sí, asistiré</option>
                         <option value="No asistirá" class="bg-black">No podré asistir</option>
                     </select>
-                    <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full btn-premium">Enviar WhatsApp</button>
+                    <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase shadow-lg">Enviar WhatsApp</button>
                 </div>
             </section>
 
-            <section class="py-24 text-center">
-                <h2 class="font-name text-4xl shimmer mb-12">Muro de Deseos</h2>
-                <textarea id="muro-mensaje" placeholder="Escribe algo lindo..." class="input-premium mb-8 h-32 resize-none italic font-light"></textarea>
-                <input type="text" id="muro-nombre" placeholder="Tu nombre" class="input-premium mb-12">
-                <button onclick="enviarDeseo()" id="btn-muro" class="px-12 py-4 border border-[--dorado] rounded-full text-[10px] tracking-widest uppercase hover:bg-dorado/10 transition-all">Publicar</button>
+            <section class="py-16 text-center">
+                <h2 class="font-name text-4xl shimmer mb-10">Muro de Deseos</h2>
+                <textarea id="muro-mensaje" placeholder="Escribe algo lindo..." class="input-premium mb-6 h-24 resize-none italic font-light"></textarea>
+                <input type="text" id="muro-nombre" placeholder="Tu nombre" class="input-premium mb-10">
+                <button onclick="enviarDeseo()" id="btn-muro" class="px-10 py-3 border border-[--dorado] rounded-full text-[9px] tracking-widest uppercase">Publicar</button>
             </section>
 
-            <footer class="py-20 opacity-20 text-[8px] tracking-[1em] uppercase text-center">
+            <footer class="py-16 opacity-20 text-[7px] tracking-[0.8em] uppercase text-center">
                 Invytia Platinum Experience
             </footer>
 
@@ -317,7 +290,12 @@
         const URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbz1QlM9Ccy08OOlvHKtNVApC6i62uatapKWDkSFVt_sRRrDFPsx7KohDrLYfXbvLVUK0Q/exec';
 
         function copyAddress() {
-            navigator.clipboard.writeText("Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, 04300 Ciudad de México, CDMX");
+            const el = document.createElement('textarea');
+            el.value = "Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, 04300 Ciudad de México, CDMX";
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
             alert("Dirección copiada");
         }
 
@@ -339,22 +317,18 @@
                     main.style.opacity = '1';
                     document.body.style.overflowY = 'auto';
                     startCountdown();
-                }, 1000);
+                }, 800);
             }, 1200);
         }
 
         async function procesarConfirmacion() {
             const nombre = document.getElementById('rsvp-nombre').value;
             const asistencia = document.getElementById('rsvp-asistencia').value;
-            const btn = document.getElementById('btn-rsvp');
             if(!nombre) return alert("Escribe tu nombre");
-
-            btn.innerText = "REGISTRANDO...";
             try {
                 await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ tipo: 'confirmacion', nombre, asistencia }) });
                 window.open(`https://wa.me/525540603988?text=${encodeURIComponent('¡Hola Arely Sarai! Confirmo mi asistencia: ' + nombre + '. Estado: ' + asistencia)}`, '_blank');
-                btn.innerText = "¡ENVIADO!";
-            } catch (e) { alert("Error"); btn.innerText = "REINTENTAR"; }
+            } catch (e) { alert("Error"); }
         }
 
         async function enviarDeseo() {
