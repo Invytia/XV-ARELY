@@ -5,103 +5,145 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Arely Sarai XV | Invytia Premium</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --vino-fondo: #4a0404;
-            --vino-intenso: #5b0e23;
-            --vino-transparente: rgba(91, 14, 35, 0.8);
+            /* Paleta Premium Vino y Dorado */
+            --vino-dark: #1f0206;
+            --vino-base: #3a040b;
+            --vino-light: #5b0e23;
             --dorado: #D4AF37;
-            --dorado-brillante: #fcf4d4;
+            --dorado-light: #F3E5AB;
+            --dorado-brillante: #FFDF73;
         }
 
         body { 
             font-family: 'Montserrat', sans-serif; 
-            background-color: var(--vino-fondo); 
-            color: var(--dorado); 
+            background: linear-gradient(135deg, var(--vino-dark) 0%, var(--vino-base) 100%);
+            color: var(--dorado-light); 
             margin: 0; 
             overflow-x: hidden; 
+            min-height: 100vh;
         }
 
         .font-name { font-family: 'Playfair Display', serif; text-transform: none !important; }
         .font-cursive { font-family: 'Great Vibes', cursive; }
 
-        /* Animación de Brillo Premium */
+        /* Efecto de Brillo Premium en Textos */
         .shimmer {
-            background: linear-gradient(90deg, var(--dorado) 20%, var(--dorado-brillante) 50%, var(--dorado) 80%);
+            background: linear-gradient(90deg, var(--dorado) 0%, var(--dorado-brillante) 50%, var(--dorado) 100%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: shine 3s linear infinite;
+            animation: shine 4s linear infinite;
         }
+        @keyframes shine { to { background-position: 200% center; } }
 
-        @keyframes shine {
-            to { background-position: 200% center; }
+        /* Efecto Liquid Glass (Cristal Elegante) */
+        .glass-panel {
+            background: rgba(91, 14, 35, 0.15);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(212,175,55,0.05);
+            border-radius: 24px;
+            position: relative;
+            overflow: hidden;
         }
         
-        /* --- SOBRE DORADO Y VINO --- */
-        #envelope-wrapper { perspective: 1000px; position: relative; z-index: 60; }
+        .glass-panel::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.03), transparent);
+            transform: skewX(-20deg);
+            animation: glass-shine 8s infinite;
+        }
+        @keyframes glass-shine {
+            0% { left: -100%; }
+            20% { left: 200%; }
+            100% { left: 200%; }
+        }
+
+        /* SOBRE ULTRA PREMIUM */
+        .bg-oro-premium {
+            background: radial-gradient(circle at center, #D4AF37 0%, #8A6508 100%);
+            position: relative;
+        }
+        .bg-oro-premium::before {
+            content: ''; position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 20.5V18H0v-2h20v-2.5L22.5 16 25 13.5V0h2v13.5L29.5 16 32 13.5V0h2v13.5L36.5 16 39 13.5V0h1v14.5l-3 3-3-3v-2l-2.5 2.5L29 12.5v2l-2.5 2.5L24 14.5v4.5H40v2H24v4.5l2.5-2.5 2.5 2.5v-2l2.5-2.5 2.5 2.5v-2l3 3-3 3V40h-1V25.5l-2.5 2.5-2.5-2.5v2l-2.5 2.5-2.5-2.5v2l-2.5 2.5L20 20.5z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+
+        #envelope-wrapper { perspective: 1200px; position: relative; z-index: 60; }
         #envelope {
-            width: 320px; height: 220px; background: var(--vino-intenso); position: relative;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); border-radius: 0 0 12px 12px;
+            width: 340px; height: 230px; 
+            background: var(--vino-base); /* Tono vino 1 (Cuerpo) */
+            position: relative;
+            box-shadow: 0 30px 60px -10px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,0,0,0.5); 
+            border-radius: 0 0 12px 12px;
             display: flex; align-items: center; justify-content: center;
-            border: 1px solid var(--dorado);
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-top: none;
         }
         #flap {
             position: absolute; top: 0; left: 0; width: 0; height: 0;
-            border-left: 160px solid transparent; border-right: 160px solid transparent;
-            border-top: 90px solid var(--dorado); 
+            border-left: 170px solid transparent; border-right: 170px solid transparent;
+            border-top: 100px solid var(--vino-light); /* Tono vino 2 (Solapa) */
             transform-origin: top;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); z-index: 3;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.5));
+        }
+        /* Sello dorado */
+        #seal {
+            position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
+            width: 45px; height: 45px; background: radial-gradient(circle, #FFDF73 0%, #D4AF37 80%, #AA7C11 100%);
+            border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.4);
+            z-index: 4; display: flex; align-items: center; justify-content: center;
+            color: var(--vino-dark); font-family: 'Playfair Display', serif; font-weight: bold; font-size: 18px;
+            transition: opacity 0.3s ease; border: 1px solid #AA7C11;
         }
         .open #flap { transform: rotateX(180deg); }
+        .open #seal { opacity: 0; transition: opacity 0.1s; }
 
-        .envelope-content {
-            position: relative;
-            z-index: 1;
-            padding-top: 45px; 
-            text-align: center;
-        }
+        .envelope-content { position: relative; z-index: 1; padding-top: 45px; text-align: center; }
 
+        /* Controles y utilidades */
         #music-control {
             position: fixed; bottom: 25px; right: 25px; z-index: 200;
-            padding: 12px 24px; background: var(--vino-intenso); border-radius: 50px;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3); cursor: pointer; display: none;
-            font-size: 10px; font-weight: 800; letter-spacing: 2px;
-            border: 1px solid var(--dorado);
-            color: var(--dorado);
+            padding: 12px 24px; background: rgba(58, 4, 11, 0.8); backdrop-filter: blur(10px);
+            border-radius: 50px; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); cursor: pointer; display: none;
+            font-size: 10px; font-weight: 600; letter-spacing: 3px; border: 1px solid var(--dorado); color: var(--dorado);
         }
 
-        .anim-slide-right {
-            opacity: 0; transform: translateX(-40px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .anim-slide-left {
-            opacity: 0; transform: translateX(40px);
-            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
-        }
-        .anim-slide-right.visible, .anim-slide-left.visible {
-            opacity: 1; transform: translateX(0);
-        }
+        .anim-slide-up { opacity: 0; transform: translateY(40px); transition: all 1s cubic-bezier(0.25, 1, 0.5, 1); }
+        .anim-slide-up.visible { opacity: 1; transform: translateY(0); }
 
         #main-content { opacity: 0; transition: opacity 1.5s ease; }
         .show-content { opacity: 1 !important; }
 
-        /* QR Styled */
-        .qr-placeholder {
-            width: 150px; height: 150px;
-            background: white;
-            padding: 10px;
-            margin: 0 auto;
-            border: 4px solid var(--dorado);
-            border-radius: 15px;
-            cursor: pointer;
+        /* Inputs Premium */
+        .input-premium {
+            background: rgba(0,0,0,0.2); border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--dorado-light); border-radius: 12px; transition: all 0.3s;
         }
+        .input-premium:focus {
+            border-color: var(--dorado); outline: none; background: rgba(0,0,0,0.4);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+        }
+        .input-premium::placeholder { color: rgba(243, 229, 171, 0.4); }
 
-        .bg-vino-alt { background-color: var(--vino-intenso); }
-        .bg-vino-trans { background-color: var(--vino-transparente); }
+        /* QR Frame Elegante */
+        .qr-frame {
+            width: 140px; height: 140px; margin: 0 auto;
+            border: 2px solid var(--dorado); padding: 8px; border-radius: 12px;
+            background: rgba(255,255,255,0.05); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .qr-frame:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(212,175,55,0.3); }
     </style>
 </head>
 <body class="overflow-hidden">
@@ -110,190 +152,199 @@
 
     <div id="music-control" onclick="toggleMusic()"><span id="music-text">PAUSAR</span></div>
 
-    <div id="opening-overlay" class="fixed inset-0 z-[100] bg-[#1a0101] flex flex-col items-center justify-center transition-opacity duration-1000">
+    <div id="opening-overlay" class="fixed inset-0 z-[100] bg-oro-premium flex flex-col items-center justify-center transition-opacity duration-1000">
         <div id="envelope-wrapper">
             <div id="envelope">
-                <div id="flap"></div>
+                <div id="flap">
+                    <div id="seal">XV</div>
+                </div>
                 <div class="envelope-content">
-                    <p class="font-cursive text-2xl text-white">Mis XV Años</p>
-                    <h2 class="font-cursive text-4xl text-white mt-1">Arely Sarai</h2>
+                    <p class="font-cursive text-3xl text-[--dorado-light]">Mis XV Años</p>
+                    <h2 class="font-cursive text-5xl text-[--dorado] mt-2 shimmer">Arely Sarai</h2>
                 </div>
             </div>
         </div>
-        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-12 px-10 py-3 bg-transparent text-white border-2 border-[#D4AF37] rounded-full shadow-lg font-bold tracking-[0.2em] text-xs hover:scale-105 transition-all">
-            ABRIR INVITACIÓN
+        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-16 px-10 py-4 bg-transparent text-[--vino-base] border border-[--vino-base] rounded-full shadow-2xl font-bold tracking-[0.3em] text-xs hover:bg-[--vino-base] hover:text-[--dorado] transition-all relative overflow-hidden group">
+            <span class="relative z-10">ABRIR INVITACIÓN</span>
+            <div class="absolute inset-0 bg-[--dorado-brillante] opacity-0 group-hover:opacity-20 transition-opacity"></div>
         </button>
     </div>
 
     <main id="main-content" class="hidden relative">
         
-        <section class="relative h-[95vh] w-full flex items-end justify-center pb-20">
-            <img src="assets/hero.jpg" alt="Arely Sarai" class="absolute inset-0 w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#4a0404] via-transparent to-transparent"></div>
-            <div class="relative text-center drop-shadow-2xl">
-                <p class="font-cursive text-5xl md:text-6xl shimmer">Mis XV Años</p>
-                <h1 class="font-cursive text-7xl md:text-9xl shimmer mt-2">Arely Sarai</h1>
+        <section class="relative h-screen w-full flex items-center justify-center">
+            <div class="absolute inset-0">
+                <img src="assets/hero.jpg" alt="Arely Sarai" class="w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-t from-[--vino-dark] via-[--vino-base]/50 to-transparent"></div>
+            </div>
+            
+            <div class="relative text-center drop-shadow-2xl mt-40 anim-slide-up">
+                <p class="font-cursive text-5xl md:text-6xl text-[--dorado-light]">Mis XV Años</p>
+                <h1 class="font-cursive text-8xl md:text-9xl shimmer mt-4">Arely Sarai</h1>
             </div>
         </section>
 
-        <section class="py-10 bg-vino-alt text-center">
-            <div id="countdown" class="flex justify-center gap-3 md:gap-8 px-4">
-                <div class="flex flex-col items-center justify-center bg-black/30 border border-dorado shadow-lg rounded-2xl w-20 h-24 md:w-24 md:h-28">
-                    <span id="days" class="font-name text-3xl md:text-4xl shimmer">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-white mt-1">Días</span>
-                </div>
-                <div class="flex flex-col items-center justify-center bg-black/30 border border-dorado shadow-lg rounded-2xl w-20 h-24 md:w-24 md:h-28">
-                    <span id="hours" class="font-name text-3xl md:text-4xl shimmer">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-white mt-1">Hrs</span>
-                </div>
-                <div class="flex flex-col items-center justify-center bg-black/30 border border-dorado shadow-lg rounded-2xl w-20 h-24 md:w-24 md:h-28">
-                    <span id="minutes" class="font-name text-3xl md:text-4xl shimmer">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-white mt-1">Min</span>
-                </div>
-                <div class="flex flex-col items-center justify-center bg-black/30 border border-dorado shadow-lg rounded-2xl w-20 h-24 md:w-24 md:h-28">
-                    <span id="seconds" class="font-name text-3xl md:text-4xl shimmer">00</span>
-                    <span class="text-[10px] uppercase tracking-widest text-white mt-1">Seg</span>
+        <section class="py-12 px-4 -mt-20 relative z-10">
+            <div class="max-w-3xl mx-auto glass-panel py-8 px-6">
+                <div id="countdown" class="flex justify-center gap-4 md:gap-10">
+                    <div class="flex flex-col items-center justify-center">
+                        <span id="days" class="font-name text-4xl md:text-5xl shimmer">00</span>
+                        <span class="text-[9px] md:text-[11px] uppercase tracking-[0.3em] text-[--dorado-light] mt-2">Días</span>
+                    </div>
+                    <div class="w-px h-12 bg-gradient-to-b from-transparent via-[--dorado] to-transparent my-auto"></div>
+                    <div class="flex flex-col items-center justify-center">
+                        <span id="hours" class="font-name text-4xl md:text-5xl shimmer">00</span>
+                        <span class="text-[9px] md:text-[11px] uppercase tracking-[0.3em] text-[--dorado-light] mt-2">Hrs</span>
+                    </div>
+                    <div class="w-px h-12 bg-gradient-to-b from-transparent via-[--dorado] to-transparent my-auto"></div>
+                    <div class="flex flex-col items-center justify-center">
+                        <span id="minutes" class="font-name text-4xl md:text-5xl shimmer">00</span>
+                        <span class="text-[9px] md:text-[11px] uppercase tracking-[0.3em] text-[--dorado-light] mt-2">Min</span>
+                    </div>
+                    <div class="w-px h-12 bg-gradient-to-b from-transparent via-[--dorado] to-transparent my-auto"></div>
+                    <div class="flex flex-col items-center justify-center">
+                        <span id="seconds" class="font-name text-4xl md:text-5xl shimmer">00</span>
+                        <span class="text-[9px] md:text-[11px] uppercase tracking-[0.3em] text-[--dorado-light] mt-2">Seg</span>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="pb-12 pt-4 px-8 text-center bg-vino-alt">
-            <p class="font-cursive text-4xl text-[#fcf4d4] max-w-lg mx-auto leading-relaxed">
+        <section class="py-16 px-8 text-center anim-slide-up">
+            <p class="font-cursive text-4xl md:text-5xl text-[--dorado-light] max-w-2xl mx-auto leading-relaxed font-light drop-shadow-lg">
                 "Hoy mis sueños se visten de fiesta y mi corazón se llena de ilusión"
             </p>
+            <div class="w-16 h-px bg-[--dorado] mx-auto mt-10"></div>
         </section>
 
-        <section class="py-12 px-6 text-center bg-vino-trans relative border-y border-dorado/30">
-            <div class="max-w-2xl mx-auto py-10">
-                <p class="uppercase tracking-[0.3em] text-[10px] text-white/70 mb-6">Con la bendición de mis padres</p>
-                <h3 class="font-cursive text-4xl shimmer">Jesus Simon Vazquez</h3>
-                <p class="font-cursive text-3xl text-white/50 my-2">&</p>
-                <h3 class="font-cursive text-4xl shimmer">Matilde Velázquez Hernández</h3>
+        <section class="py-16 px-6 relative anim-slide-up">
+            <div class="max-w-2xl mx-auto glass-panel p-10 md:p-16 text-center">
+                <p class="uppercase tracking-[0.4em] text-[10px] text-[--dorado]/70 mb-8 font-semibold">Con la bendición de mis padres</p>
+                <h3 class="font-cursive text-4xl md:text-5xl shimmer">Jesus Simon Vazquez</h3>
+                <p class="font-cursive text-3xl text-[--dorado-light]/50 my-3">&</p>
+                <h3 class="font-cursive text-4xl md:text-5xl shimmer">Matilde Velázquez Hernández</h3>
 
-                <div class="my-10 w-24 h-px bg-dorado mx-auto"></div>
+                <div class="my-12 flex items-center justify-center gap-4">
+                    <div class="h-px w-12 bg-gradient-to-r from-transparent to-[--dorado]"></div>
+                    <div class="w-2 h-2 rounded-full bg-[--dorado] shadow-[0_0_10px_#D4AF37]"></div>
+                    <div class="h-px w-12 bg-gradient-to-l from-transparent to-[--dorado]"></div>
+                </div>
 
-                <p class="uppercase tracking-[0.3em] text-[10px] text-white/70 mb-6">Y mis padrinos</p>
-                <h3 class="font-cursive text-4xl shimmer">José Luis Oropeza Cruz</h3>
-                <p class="font-cursive text-3xl text-white/50 my-2">&</p>
-                <h3 class="font-cursive text-4xl shimmer">María Magdalena Velázquez Hernández</h3>
+                <p class="uppercase tracking-[0.4em] text-[10px] text-[--dorado]/70 mb-8 font-semibold">Y mis padrinos</p>
+                <h3 class="font-cursive text-4xl md:text-5xl shimmer">José Luis Oropeza Cruz</h3>
+                <p class="font-cursive text-3xl text-[--dorado-light]/50 my-3">&</p>
+                <h3 class="font-cursive text-4xl md:text-5xl shimmer">María Magdalena Velázquez Hernández</h3>
             </div>
         </section>
 
-        <section class="py-12 text-center bg-vino-alt">
-            <h2 class="font-name text-5xl shimmer">30 de Junio</h2>
+        <section class="py-16 text-center anim-slide-up">
+            <p class="uppercase tracking-[0.4em] text-[12px] text-[--dorado-light] mb-4">Celebra conmigo este</p>
+            <h2 class="font-name text-6xl md:text-7xl shimmer">30 de Junio</h2>
+            <div class="w-10 h-10 border border-[--dorado] rounded-full mx-auto mt-8 flex items-center justify-center">
+                <div class="w-2 h-2 rounded-full bg-[--dorado]"></div>
+            </div>
         </section>
 
-        <section class="py-16 px-6 text-center bg-vino-alt">
-            <div class="max-w-xl mx-auto bg-black/40 rounded-[3rem] overflow-hidden shadow-2xl border border-dorado">
-                <div class="p-8 md:p-10">
-                    <h2 class="font-name text-4xl shimmer mb-2">Recepción</h2>
-                    <h3 class="text-white font-bold tracking-widest uppercase text-sm mb-4">Salón Samsara</h3>
+        <section class="py-16 px-6 text-center anim-slide-up">
+            <div class="max-w-2xl mx-auto glass-panel overflow-hidden">
+                <div class="w-full h-64 relative border-b border-[--dorado]/30">
+                    <img src="assets/salon.jpg" alt="Salón Samsara" class="w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-[rgba(58,4,11,0.9)] to-transparent"></div>
+                    <h2 class="font-name text-5xl shimmer absolute bottom-4 left-0 w-full">Recepción</h2>
+                </div>
+                
+                <div class="p-10 md:p-14 text-center">
+                    <div class="inline-block border border-[--dorado] px-6 py-2 rounded-full mb-6">
+                        <span class="text-[--dorado-light] tracking-[0.2em] text-xs font-bold uppercase">18:30 HRS</span>
+                    </div>
                     
-                    <p class="text-white/80 text-sm leading-relaxed mb-8">
+                    <h3 class="text-[--dorado] font-semibold tracking-widest uppercase text-lg mb-4">Salón Samsara</h3>
+                    <p class="text-[--dorado-light]/80 text-sm leading-relaxed mb-10 font-light">
                         Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, <br>
                         04300 Ciudad de México, CDMX
                     </p>
 
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                        <a href="https://share.google/czKc1hNzaSql5bSY1" target="_blank" class="px-8 py-4 bg-[#D4AF37] text-white rounded-2xl text-[10px] tracking-widest font-bold shadow-lg hover:bg-[#b8952d] transition-all">
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center">
+                        <a href="https://share.google/czKc1hNzaSql5bSY1" target="_blank" class="px-8 py-4 bg-[--dorado] text-[--vino-dark] rounded-full text-[10px] tracking-[0.2em] font-bold shadow-[0_0_20px_rgba(212,175,55,0.4)] hover:bg-[--dorado-brillante] transition-all">
                             VER UBICACIÓN
                         </a>
-                        <button onclick="copyAddress()" class="px-8 py-4 border-2 border-dorado text-dorado rounded-2xl text-[10px] tracking-widest font-bold hover:bg-white/10 transition-all uppercase">
-                            Copiar Dirección
+                        <button onclick="copyAddress()" class="px-8 py-4 border border-[--dorado] text-[--dorado-light] rounded-full text-[10px] tracking-[0.2em] font-bold hover:bg-[--dorado]/10 transition-all uppercase">
+                            COPIAR DIRECCIÓN
                         </button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="py-16 px-6 text-center bg-vino-trans relative">
-            <h2 class="font-name text-4xl shimmer mb-10">Itinerario</h2>
-            
-            <div class="max-w-md mx-auto space-y-8 text-left border-l-2 border-dorado/50 pl-8">
-                <div class="relative anim-slide-right" style="transition-delay: 0.1s;">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-dorado"></div>
-                    <p class="font-name text-white text-lg flex items-center gap-2"><span class="text-xl">🥂</span> 18:30 Recepción</p>
-                </div>
-                <div class="relative anim-slide-left" style="transition-delay: 0.3s;">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-dorado"></div>
-                    <p class="font-name text-white text-lg flex items-center gap-2"><span class="text-xl">💃</span> 19:30 Protocolo y Vals</p>
-                </div>
-                <div class="relative anim-slide-right" style="transition-delay: 0.5s;">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-dorado"></div>
-                    <p class="font-name text-white text-lg flex items-center gap-2"><span class="text-xl">🍽️</span> 20:30 Cena</p>
-                </div>
-                <div class="relative anim-slide-left" style="transition-delay: 0.7s;">
-                    <div class="absolute -left-[41px] top-1 w-4 h-4 rounded-full bg-dorado"></div>
-                    <p class="font-name text-white text-lg flex items-center gap-2"><span class="text-xl">✨</span> 22:00 Fiesta</p>
-                </div>
+        <section class="py-16 px-6 anim-slide-up">
+            <div class="max-w-lg mx-auto glass-panel p-10 text-center">
+                <svg class="w-10 h-10 mx-auto mb-6 text-[--dorado]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 00-2.456 2.456z"></path>
+                </svg>
+                <h2 class="font-name text-3xl shimmer mb-4 uppercase tracking-[0.1em]">Código de Vestimenta</h2>
+                <div class="w-12 h-px bg-[--dorado]/50 mx-auto mb-4"></div>
+                <p class="uppercase tracking-[0.4em] text-sm text-[--dorado-light] font-bold mb-4">Formal</p>
+                <p class="text-[--dorado-light]/70 font-light italic text-sm">Se reserva el color vino para la quinceañera.</p>
             </div>
         </section>
 
-        <section class="py-16 px-8 text-center bg-black/20">
-            <svg class="w-12 h-12 mx-auto mb-3 text-dorado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09l2.846.813-2.846.813a4.5 4.5 0 00-3.09 3.09z"></path>
-            </svg>
-            <h2 class="font-name text-2xl shimmer mb-4 uppercase tracking-widest">Código de Vestimenta</h2>
-            <p class="uppercase tracking-widest text-sm text-white font-bold mb-2">Formal</p>
-            <p class="text-dorado font-light italic max-w-sm mx-auto">Se reserva el color vino para la quinceañera.</p>
-        </section>
-
-        <section class="py-16 px-8 text-center bg-vino-alt border-t border-dorado/20">
-            <svg class="w-12 h-12 mx-auto mb-3 text-dorado" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path>
-            </svg>
-            <h2 class="font-name text-2xl shimmer mb-8">Sugerencia de Regalos</h2>
+        <section class="py-16 px-6 anim-slide-up">
+            <h2 class="font-name text-4xl shimmer mb-12 text-center">Sugerencia de Regalos</h2>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto items-center">
-                <div class="bg-black/20 p-8 rounded-3xl border border-dorado/30">
-                    <h4 class="font-name text-xl mb-4">Mesa de Regalos</h4>
-                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Liverpool_logo.svg/2560px-Liverpool_logo.svg.png" class="h-8 mx-auto mb-6 invert" alt="Liverpool">
-                    </a>
-                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank" class="px-6 py-3 bg-white/10 text-white border border-white/20 rounded-full text-[10px] tracking-widest">VER MESA</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="glass-panel p-10 text-center flex flex-col justify-center">
+                    <h4 class="font-name text-2xl text-[--dorado] mb-6">Mesa de Regalos</h4>
+                    <img src="assets/liverpool.png" alt="Liverpool" class="h-10 object-contain mx-auto mb-8 opacity-90">
+                    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank" class="px-8 py-3 bg-transparent border border-[--dorado] text-[--dorado-light] rounded-full text-[10px] tracking-[0.2em] hover:bg-[--dorado] hover:text-[--vino-dark] transition-colors uppercase font-bold w-max mx-auto">Ver Mesa</a>
                 </div>
 
-                <div class="bg-black/20 p-8 rounded-3xl border border-dorado/30">
-                    <h4 class="font-name text-xl mb-4">Lluvia de Sobres</h4>
-                    <p class="text-white/70 font-light italic leading-relaxed text-sm">
+                <div class="glass-panel p-10 text-center flex flex-col justify-center">
+                    <svg class="w-8 h-8 mx-auto mb-4 text-[--dorado]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                    </svg>
+                    <h4 class="font-name text-2xl text-[--dorado] mb-4">Lluvia de Sobres</h4>
+                    <p class="text-[--dorado-light]/80 font-light italic leading-relaxed text-sm">
                         "Para nosotros, tu presencia es el mejor regalo. Si deseas regalarme algo, consideramos la dinámica de lluvia de sobres."
                     </p>
                 </div>
             </div>
 
-            <div class="mt-16 text-center">
-                <h3 class="font-name text-xl shimmer mb-6 uppercase tracking-widest">Comparte tus momentos conmigo</h3>
-                <div class="qr-placeholder" onclick="window.open('https://drive.google.com/drive/folders/1fhfJhPkrdXJq3ZEg2BiGUsRCpxVHyy3L?usp=sharing')">
-                    <svg viewBox="0 0 24 24" fill="var(--vino-intenso)">
+            <div class="mt-16 text-center max-w-xl mx-auto glass-panel p-10">
+                <h3 class="font-name text-2xl text-[--dorado] mb-8 uppercase tracking-widest">Comparte tus momentos</h3>
+                
+                <div class="qr-frame" onclick="window.open('https://drive.google.com/drive/folders/1fhfJhPkrdXJq3ZEg2BiGUsRCpxVHyy3L?usp=sharing')">
+                    <svg viewBox="0 0 24 24" fill="var(--dorado-light)" class="w-20 h-20 opacity-80">
                         <path d="M3 3h8v8H3V3zm2 2v4h4V5H5zm8-2h8v8h-8V3zm2 2v4h4V5h-4zM3 13h8v8H3v-8zm2 2v4h4v-4H5zm13-2h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm3 3h3v2h-3v-2zm-3 0h2v2h-2v-2zm0-6h2v2h-2v-2zm3 0h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2zm-3 3h2v2h-2v-2zm3 0h3v2h-3v-2z"/>
                     </svg>
                 </div>
-                <p class="mt-4 text-[10px] text-white/50 tracking-widest uppercase">Toca el código para subir fotos y videos</p>
+                <p class="mt-6 text-[10px] text-[--dorado-light]/60 tracking-[0.2em] uppercase font-semibold">Toca para subir fotos y videos</p>
             </div>
         </section>
 
-        <section class="py-16 px-6 bg-vino-trans" id="confirmacion">
-            <div class="max-w-md mx-auto bg-black/40 p-10 rounded-[3rem] shadow-xl text-center border border-dorado">
-                <h2 class="font-name text-3xl mb-6 shimmer uppercase tracking-widest">Confirmar</h2>
-                <input type="text" id="rsvp-nombre" placeholder="Nombre completo" class="w-full p-4 mb-4 rounded-2xl bg-white/10 border border-dorado/50 text-white outline-none placeholder:text-white/30">
-                <select id="rsvp-asistencia" class="w-full p-4 mb-6 rounded-2xl bg-white/10 border border-dorado/50 text-white outline-none">
-                    <option value="Confirmado" class="bg-vino-intenso">Sí, asistiré</option>
-                    <option value="No asistirá" class="bg-vino-intenso">No podré asistir</option>
+        <section class="py-16 px-6 anim-slide-up" id="confirmacion">
+            <div class="max-w-md mx-auto glass-panel p-10 text-center">
+                <h2 class="font-name text-4xl mb-8 shimmer">Confirmar</h2>
+                <input type="text" id="rsvp-nombre" placeholder="Nombre completo" class="w-full p-4 mb-5 input-premium">
+                <select id="rsvp-asistencia" class="w-full p-4 mb-8 input-premium appearance-none">
+                    <option value="Confirmado" class="bg-[--vino-dark] text-[--dorado-light]">Sí, asistiré</option>
+                    <option value="No asistirá" class="bg-[--vino-dark] text-[--dorado-light]">No podré asistir</option>
                 </select>
-                <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full py-4 bg-dorado text-white rounded-2xl font-bold tracking-widest text-[10px] hover:bg-[#b8952d] transition-colors">ENVIAR POR WHATSAPP</button>
+                <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full py-4 bg-[--dorado] text-[--vino-dark] rounded-full font-bold tracking-[0.2em] text-[11px] hover:bg-[--dorado-brillante] transition-colors shadow-[0_0_15px_rgba(212,175,55,0.3)]">ENVIAR POR WHATSAPP</button>
             </div>
         </section>
 
-        <section class="py-16 px-6 text-center bg-vino-alt border-t border-dorado/10">
-            <h2 class="font-name text-3xl shimmer mb-8">Muro de Deseos</h2>
-            <div class="max-w-2xl mx-auto space-y-4">
-                <textarea id="muro-mensaje" placeholder="Tus deseos aquí..." class="w-full h-40 p-8 rounded-3xl bg-black/20 border border-dorado/30 text-white outline-none italic resize-none"></textarea>
-                <input type="text" id="muro-nombre" placeholder="Tu nombre" class="w-full p-4 rounded-2xl bg-black/20 border border-dorado/30 text-white outline-none">
-                <button onclick="enviarDeseo()" id="btn-muro" class="px-12 py-3 border-2 border-dorado text-dorado rounded-full font-bold text-[10px] tracking-widest hover:bg-dorado/10 transition-colors">PUBLICAR</button>
+        <section class="py-16 px-6 anim-slide-up">
+            <div class="max-w-2xl mx-auto glass-panel p-10 text-center">
+                <h2 class="font-name text-4xl shimmer mb-8">Muro de Deseos</h2>
+                <textarea id="muro-mensaje" placeholder="Escribe un lindo deseo..." class="w-full h-32 p-5 mb-5 input-premium resize-none italic font-light"></textarea>
+                <input type="text" id="muro-nombre" placeholder="Tu nombre" class="w-full p-4 mb-8 input-premium">
+                <button onclick="enviarDeseo()" id="btn-muro" class="px-12 py-3 border border-[--dorado] text-[--dorado] rounded-full font-bold text-[10px] tracking-[0.2em] hover:bg-[--dorado]/10 transition-colors uppercase">Publicar Mensaje</button>
             </div>
         </section>
 
-        <footer class="py-10 text-center text-[9px] tracking-[0.5em] text-white/40 bg-vino-alt">INVYTIA PLATINUM EXPERIENCE</footer>
+        <footer class="py-12 text-center border-t border-[--dorado]/10 mt-10">
+            <p class="text-[8px] tracking-[0.6em] text-[--dorado]/30 uppercase font-bold">Invytia Platinum Experience</p>
+        </footer>
     </main>
 
     <script>
@@ -310,21 +361,25 @@
 
         function iniciarApertura() {
             document.getElementById('envelope-wrapper').classList.add('open');
-            document.getElementById('btn-abrir').style.display = 'none';
+            document.getElementById('btn-abrir').style.opacity = '0';
+            
+            // Intento de reproducir música
             audio.play().catch(e => console.log("Audio deferred"));
             document.getElementById('music-control').style.display = 'flex';
             
             setTimeout(() => {
                 document.getElementById('opening-overlay').style.opacity = '0';
                 document.getElementById('main-content').classList.remove('hidden');
+                
                 initObserver();
+                
                 setTimeout(() => {
                     document.getElementById('opening-overlay').style.display = 'none';
                     document.getElementById('main-content').classList.add('show-content');
                     document.body.style.overflowY = 'auto';
                     startCountdown();
                 }, 1000);
-            }, 1000);
+            }, 1200);
         }
 
         function initObserver() {
@@ -335,7 +390,7 @@
                     }
                 });
             }, { threshold: 0.1 });
-            document.querySelectorAll('.anim-slide-right, .anim-slide-left').forEach(el => observer.observe(el));
+            document.querySelectorAll('.anim-slide-up').forEach(el => observer.observe(el));
         }
 
         async function procesarConfirmacion() {
@@ -364,8 +419,8 @@
                 alert("¡Mensaje publicado con éxito!");
                 document.getElementById('muro-mensaje').value = "";
                 document.getElementById('muro-nombre').value = "";
-                btn.innerText = "PUBLICAR";
-            } catch (e) { alert("Error"); btn.innerText = "PUBLICAR"; }
+                btn.innerText = "PUBLICAR MENSAJE";
+            } catch (e) { alert("Error"); btn.innerText = "PUBLICAR MENSAJE"; }
         }
 
         function startCountdown() {
@@ -374,10 +429,10 @@
                 const now = new Date().getTime();
                 const dist = target - now;
                 if (dist > 0) {
-                    document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
-                    document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    document.getElementById("minutes").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
-                    document.getElementById("seconds").innerText = Math.floor((dist % (1000 * 60)) / 1000);
+                    document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24)).toString().padStart(2, '0');
+                    document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)).toString().padStart(2, '0');
+                    document.getElementById("minutes").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60)).toString().padStart(2, '0');
+                    document.getElementById("seconds").innerText = Math.floor((dist % (1000 * 60)) / 1000).toString().padStart(2, '0');
                 }
             }, 1000);
         }
