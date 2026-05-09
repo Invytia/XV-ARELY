@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arely Sarai XV | Invytia Premium</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@200;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --vino: #6B0D16; 
+            --vino-claro: #8B1A24;
+            --dorado: #C5A021;
+            --fondo: #FAF9F6;
+            --texto: #2D090D;
+        }
+        body { font-family: 'Montserrat', sans-serif; background-color: var(--fondo); color: var(--texto); margin: 0; overflow-x: hidden; }
+        .font-name { font-family: 'Playfair Display', serif; text-transform: none !important; }
+        .font-cursive { font-family: 'Great Vibes', cursive; }
+        
+        /* --- SOBRE PREMIUM REFINADO --- */
+        #envelope-wrapper { perspective: 1000px; position: relative; z-index: 60; }
+        #envelope {
+            width: 320px; height: 220px; background: white; position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.15); border-radius: 0 0 12px 12px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        #flap {
+            position: absolute; top: 0; left: 0; width: 0; height: 0;
+            border-left: 160px solid transparent; border-right: 160px solid transparent;
+            border-top: 90px solid var(--vino); 
+            transform-origin: top;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1); z-index: 2;
+        }
+        .open #flap { transform: rotateX(180deg); }
+
+        .envelope-content {
+            position: relative;
+            z-index: 1;
+            padding-top: 45px; 
+            text-align: center;
+        }
+
+        #music-control {
+            position: fixed; bottom: 25px; right: 25px; z-index: 200;
+            padding: 12px 24px; background: white; border-radius: 50px;
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); cursor: pointer; display: none;
+            font-size: 10px; font-weight: 800; letter-spacing: 2px;
+            border: 1px solid var(--dorado);
+            color: var(--vino);
+        }
+
+        .butterfly-img {
+            position: absolute; pointer-events: none; z-index: 20;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.1));
+            animation: aleteo 0.5s ease-in-out infinite alternate;
+        }
+        @keyframes aleteo { from { transform: scaleX(1) rotate(0deg); } to { transform: scaleX(0.7) rotate(5deg); } }
+        .floating-bg { animation: moveSlow 25s linear infinite; opacity: 0.5; }
+        @keyframes moveSlow {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(15vw, -10vh) rotate(10deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
+        .anim-slide-right {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .anim-slide-left {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .anim-slide-right.visible, .anim-slide-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        #main-content { opacity: 0; transition: opacity 1.5s ease; }
+        .show-content { opacity: 1 !important; }
+
+        .qr-section {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin: 20px auto;
+            max-width: 300px;
+            border: 2px solid var(--dorado);
+        }
+        .qr-mock {
+            width: 150px;
+            height: 150px;
+            margin: 20px auto;
+            background: #fff;
+            border: 5px solid var(--vino);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            cursor: pointer;
+        }
+        .qr-mock::after {
+            content: "SCAN";
+            font-size: 10px;
+            background: var(--dorado);
+            color: white;
+            padding: 2px 8px;
+            position: absolute;
+            bottom: -10px;
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+
+    <audio id="invite-music" loop><source src="assets/song.mp3" type="audio/mpeg"></audio>
+
+    <div id="music-control" onclick="toggleMusic()"><span id="music-text">PAUSAR</span></div>
+
+    <div id="opening-overlay" class="fixed inset-0 z-[100] bg-[#FAF9F6] flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div id="envelope-wrapper">
+            <div id="envelope">
+                <div id="flap"></div>
+                <div class="envelope-content">
+                    <p class="font-cursive text-2xl text-[var(--dorado)]">Mis XV Años</p>
+                    <h2 class="font-cursive text-4xl text-[var(--vino)] mt-1">Arely Sarai</h2>
+                </div>
+            </div>
+        </div>
+        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-12 px-10 py-3 bg-white text-[var(--vino)] border border-[var(--dorado)] rounded-full shadow-lg font-bold tracking-[0.2em] text-xs hover:scale-105 transition-all">
+            ABRIR INVITACIÓN
+        </button>
+    </div>
+
+    <main id="main-content" class="hidden relative">
+        <img src="assets/mariposa.png" class="butterfly-img floating-bg" style="top:15%; left:5%; width:60px;">
+        <img src="assets/mariposa.png" class="butterfly-img floating-bg" style="top:35%; right:12%; width:45px; animation-delay:-3s;">
+        <img src="assets/mariposa.png" class="butterfly-img floating-bg" style="top:65%; right:8%; width:50px; animation-delay:-5s;">
+        <img src="assets/mariposa.png" class="butterfly-img floating-bg" style="top:80%; left:15%; width:55px; animation-delay:-7s;">
+
+        <section class="relative h-[95vh] w-full flex items-end justify-center pb-12 -mt-[15px]">
+            <img src="assets/hero.jpg" alt="Arely Sarai" class="absolute inset-0 w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-[var(--fondo)] via-[var(--fondo)]/80 to-transparent/10"></div>
+            <div class="relative text-center drop-shadow-md">
+                <p class="font-cursive text-4xl md:text-5xl text-[var(--dorado)]">Mis XV Años</p>
+                <h1 class="font-cursive text-7xl md:text-9xl text-[var(--vino)] mt-2">Arely Sarai</h1>
+            </div>
+        </section>
+
+        <section class="py-10 bg-white text-center">
+            <div id="countdown" class="flex justify-center gap-3 md:gap-8 px-4">
+                <div class="flex flex-col items-center justify-center bg-white backdrop-blur-md border border-[var(--dorado)]/30 shadow-[0_8px_20px_rgba(0,0,0,0.06)] rounded-2xl w-20 h-24 md:w-24 md:h-28">
+                    <span id="days" class="font-name text-3xl md:text-4xl text-[var(--vino)]">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-[var(--dorado)] mt-1">Días</span>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-white backdrop-blur-md border border-[var(--dorado)]/30 shadow-[0_8px_20px_rgba(0,0,0,0.06)] rounded-2xl w-20 h-24 md:w-24 md:h-28">
+                    <span id="hours" class="font-name text-3xl md:text-4xl text-[var(--vino)]">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-[var(--dorado)] mt-1">Hrs</span>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-white backdrop-blur-md border border-[var(--dorado)]/30 shadow-[0_8px_20px_rgba(0,0,0,0.06)] rounded-2xl w-20 h-24 md:w-24 md:h-28">
+                    <span id="minutes" class="font-name text-3xl md:text-4xl text-[var(--vino)]">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-[var(--dorado)] mt-1">Min</span>
+                </div>
+                <div class="flex flex-col items-center justify-center bg-white backdrop-blur-md border border-[var(--dorado)]/30 shadow-[0_8px_20px_rgba(0,0,0,0.06)] rounded-2xl w-20 h-24 md:w-24 md:h-28">
+                    <span id="seconds" class="font-name text-3xl md:text-4xl text-[var(--vino)]">00</span>
+                    <span class="text-[10px] uppercase tracking-widest text-[var(--dorado)] mt-1">Seg</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="pb-12 pt-4 px-8 text-center bg-white">
+            <p class="font-cursive text-3xl text-[var(--vino)] max-w-lg mx-auto leading-relaxed">
+                "Hoy mis sueños se visten de fiesta y mi corazón se llena de ilusión"
+            </p>
+        </section>
+
+        <section class="py-12 px-6 text-center bg-white relative">
+            <div class="max-w-2xl mx-auto border-y border-[var(--dorado)]/20 py-10">
+                <p class="uppercase tracking-[0.3em] text-[10px] text-gray-400 mb-6">Con la bendición de mis padres</p>
+                <h3 class="font-cursive text-4xl text-[var(--vino)]">Jesus Simon Vazquez</h3>
+                <p class="font-cursive text-3xl text-[var(--dorado)] my-2">&</p>
+                <h3 class="font-cursive text-4xl text-[var(--vino)]">Matilde Velázquez Hernández</h3>
+            </div>
+        </section>
+
+        <section class="py-12 px-6 text-center bg-white relative">
+            <div class="max-w-2xl mx-auto border-b border-[var(--dorado)]/20 pb-10">
+                <p class="uppercase tracking-[0.3em] text-[10px] text-gray-400 mb-6">Mis Padrinos</p>
+                <h3 class="font-cursive text-4xl text-[var(--vino)]">José Luis Oropeza Cruz</h3>
+                <p class="font-cursive text-3xl text-[var(--dorado)] my-2">&</p>
+                <h3 class="font-cursive text-4xl text-[var(--vino)]">María Magdalena Velázquez Hernández</h3>
+            </div>
+        </section>
+
+        <section class="py-6 text-center bg-white">
+            <h2 class="font-name text-4xl text-[var(--vino)]">30 de Junio</h2>
+        </section>
+
+        <section class="py-16 px-6 text-center bg-white">
+            <div class="max-w-xl mx-auto bg-white rounded-[3rem] overflow-hidden shadow-xl border border-[var(--dorado)]/20">
+                <img src="assets/salon.jpg" alt="Salón" class="w-full h-64 object-cover">
+                <div class="p-8 md:p-10">
+                    <h2 class="font-name text-3xl text-[var(--vino)] mb-2">Recepción</h2>
+                    <h3 class="text-[var(--dorado)] font-bold tracking-widest uppercase text-sm mb-4">A las 18:30 hrs</h3>
+                    
+                    <p class="text-gray-500 text-sm leading-relaxed mb-8">
+                        Lugar del evento <br>
+                        Dirección del salón aquí.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="#" target="_blank" class="px-8 py-4 bg-[var(--vino)] text-white rounded-2xl text-[10px] tracking-widest font-bold shadow-lg hover:bg-[var(--vino-claro)] transition-all">
+                            VER UBICACIÓN
+                        </a>
+                        <button onclick="copyAddress()" class="px-8 py-4 border-2 border-[var(--dorado)]/30 text-[var(--vino)] rounded-2xl text-[10px] tracking-widest font-bold hover:bg-[var(--fondo)] transition-all uppercase">
+                            Copiar Dirección
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-16 px-8 text-center bg-[var(--fondo)]">
+            <h2 class="font-name text-2xl text-[var(--vino)] mb-4">Código de Vestimenta</h2>
+            <p class="uppercase tracking-widest text-sm text-[var(--vino)] font-bold mb-2">Formal</p>
+            <p class="text-[var(--dorado)] font-light italic max-w-sm mx-auto">Se guarda el color vino para la quinceañera.</p>
+        </section>
+
+        <section class="py-16 px-8 text-center bg-white border-t border-[var(--dorado)]/10">
+            <h2 class="font-name text-2xl text-[var(--vino)] mb-4">Mesa de Regalos</h2>
+            <div class="flex flex-col items-center gap-4 mb-8">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/Liverpool_logo.svg" alt="Liverpool" class="h-8">
+                <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank" class="px-8 py-3 bg-[var(--vino)] text-white rounded-full text-[10px] tracking-widest font-bold">IR A LIVERPOOL</a>
+            </div>
+            
+            <h2 class="font-name text-2xl text-[var(--vino)] mb-4">Sugerencia de Regalos</h2>
+            <p class="text-[var(--dorado)] font-light italic max-w-md mx-auto leading-relaxed">
+                "Para nosotros, tu presencia es el mejor regalo. Si deseas regalarme algo, consideramos la dinámica de lluvia de sobres."
+            </p>
+        </section>
+
+        <section class="py-16 px-6 text-center bg-white">
+            <div class="qr-section">
+                <h2 class="font-name text-xl text-[var(--vino)] mb-2">Comparte tus momentos</h2>
+                <p class="text-[10px] text-gray-400 mb-4 uppercase tracking-widest">Sube tus fotos y videos</p>
+                <div class="qr-mock" onclick="window.open('https://drive.google.com/drive/folders/1fhfJhPkrdXJq3ZEg2BiGUsRCpxVHyy3L?usp=sharing', '_blank')">
+                    <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="var(--vino)" stroke-width="1.5">
+                        <path d="M3 7V5a2 2 0 012-2h2M17 3h2a2 2 0 012 2v2M21 17v2a2 2 0 01-2 2h-2M7 21H5a2 2 0 01-2-2v-2" />
+                        <rect x="7" y="7" width="3" height="3" />
+                        <rect x="14" y="7" width="3" height="3" />
+                        <rect x="7" y="14" width="3" height="3" />
+                        <path d="M14 14h3v3h-3z" />
+                    </svg>
+                </div>
+                <p class="text-[9px] mt-4 text-gray-500 italic">Toca el código para abrir la carpeta compartida</p>
+            </div>
+        </section>
+
+        <section class="py-16 px-6 bg-[var(--fondo)]" id="confirmacion">
+            <div class="max-w-md mx-auto bg-white p-10 rounded-[3rem] shadow-xl text-center border border-[var(--dorado)]/20">
+                <h2 class="font-name text-2xl mb-6 text-[var(--vino)] uppercase tracking-widest">Confirmar</h2>
+                <input type="text" id="rsvp-nombre" placeholder="Nombre completo" class="w-full p-4 mb-4 rounded-2xl bg-[var(--fondo)] border border-[var(--dorado)]/10 outline-none">
+                <select id="rsvp-asistencia" class="w-full p-4 mb-6 rounded-2xl bg-[var(--fondo)] border border-[var(--dorado)]/10 outline-none">
+                    <option value="Confirmado">Sí, asistiré</option>
+                    <option value="No asistirá">No podré asistir</option>
+                </select>
+                <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full py-4 bg-[var(--vino)] text-white rounded-2xl font-bold tracking-widest text-[10px] hover:bg-[var(--vino-claro)] transition-colors">ENVIAR Y NOTIFICAR POR WHATSAPP</button>
+            </div>
+        </section>
+
+        <footer class="py-10 text-center text-[9px] tracking-[0.5em] text-gray-400">INVYTIA PLATINUM EXPERIENCE</footer>
+    </main>
+
+    <script>
+        const audio = document.getElementById('invite-music');
+        const musicText = document.getElementById('music-text');
+        const WHATSAPP_NUM = "525540603988";
+
+        function copyAddress() {
+            const address = "Dirección del evento aquí";
+            navigator.clipboard.writeText(address).then(() => {
+                alert("Dirección copiada");
+            });
+        }
+
+        function iniciarApertura() {
+            document.getElementById('envelope-wrapper').classList.add('open');
+            document.getElementById('btn-abrir').style.display = 'none';
+            audio.play().catch(e => console.log("Audio deferred"));
+            document.getElementById('music-control').style.display = 'flex';
+            
+            setTimeout(() => {
+                document.getElementById('opening-overlay').style.opacity = '0';
+                document.getElementById('main-content').classList.remove('hidden');
+                initObserver();
+                setTimeout(() => {
+                    document.getElementById('opening-overlay').style.display = 'none';
+                    document.getElementById('main-content').classList.add('show-content');
+                    document.body.style.overflowY = 'auto';
+                    startCountdown();
+                }, 1000);
+            }, 2500);
+        }
+
+        function initObserver() {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.anim-slide-right, .anim-slide-left').forEach(el => observer.observe(el));
+        }
+
+        async function procesarConfirmacion() {
+            const nombre = document.getElementById('rsvp-nombre').value;
+            const asistencia = document.getElementById('rsvp-asistencia').value;
+            const btn = document.getElementById('btn-rsvp');
+            if(!nombre) return alert("Escribe tu nombre");
+
+            const msg = `¡Hola Arely Sarai! Confirmo mi asistencia: ${nombre}. Estado: ${asistencia}`;
+            window.open(`https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        function startCountdown() {
+            const target = new Date("June 30, 2026 18:30:00").getTime();
+            setInterval(() => {
+                const now = new Date().getTime();
+                const dist = target - now;
+                if (dist > 0) {
+                    document.getElementById("days").innerText = Math.floor(dist / (1000 * 60 * 60 * 24));
+                    document.getElementById("hours").innerText = Math.floor((dist % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    document.getElementById("minutes").innerText = Math.floor((dist % (1000 * 60 * 60)) / (1000 * 60));
+                    document.getElementById("seconds").innerText = Math.floor((dist % (1000 * 60)) / 1000);
+                }
+            }, 1000);
+        }
+
+        function toggleMusic() {
+            if (audio.paused) { audio.play(); musicText.innerText = "PAUSAR"; }
+            else { audio.pause(); musicText.innerText = "REANUDAR"; }
+        }
+    </script>
+</body>
+</html>
