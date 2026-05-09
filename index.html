@@ -47,7 +47,7 @@
             word-break: break-word;
         }
 
-        /* GLITTER OPTIMIZADO (Menor carga de CPU) */
+        /* GLITTER OPTIMIZADO */
         .glitter-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1;
@@ -77,7 +77,7 @@
             border-radius: 24px;
         }
 
-        /* SOBRE RESPONSIVO - FONDO BLANCO PERLA */
+        /* SOBRE RESPONSIVO */
         #opening-overlay { background-color: var(--blanco-perla); z-index: 100; }
         #envelope-wrapper { perspective: 1200px; width: 100%; display: flex; justify-content: center; }
         #envelope {
@@ -234,8 +234,8 @@
 
             <section class="py-16 text-center">
                 <h2 class="font-name text-2xl shimmer mb-4 uppercase tracking-widest">Código de Vestimenta</h2>
-                <p class="uppercase tracking-[0.5em] text-xs font-bold mb-3">Formal</p>
-                <p class="italic text-[11px] opacity-60">Se reserva el color vino para la quinceañera.</p>
+                <p class="uppercase tracking-[0.5em] text-xs font-bold mb-3 text-white">Formal</p>
+                <p class="italic text-[11px] opacity-60 px-6">Se reserva el color vino para la quinceañera.</p>
             </section>
 
             <div class="premium-divider"></div>
@@ -270,8 +270,8 @@
                 <div class="space-y-6">
                     <input type="text" id="rsvp-nombre" placeholder="Nombre completo" class="input-premium">
                     <select id="rsvp-asistencia" class="input-premium cursor-pointer">
-                        <option value="Confirmado" class="bg-black">Sí, asistiré</option>
-                        <option value="No asistirá" class="bg-black">No podré asistir</option>
+                        <option value="Confirmado" class="bg-black text-white">Sí, asistiré</option>
+                        <option value="No asistirá" class="bg-black text-white">No podré asistir</option>
                     </select>
                     <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase shadow-lg active:scale-95 transition-transform">Enviar WhatsApp</button>
                 </div>
@@ -348,8 +348,9 @@
             } catch (e) {}
         }
 
+        // LÓGICA DE CUENTA ATRÁS ACTUALIZADA: 30 DE MAYO DE 2026
         function startCountdown() {
-            const target = new Date("Jun 30, 2026 18:30:00").getTime();
+            const target = new Date("May 30, 2026 18:30:00").getTime();
             setInterval(() => {
                 const now = new Date().getTime();
                 const dist = target - now;
