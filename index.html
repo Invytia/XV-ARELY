@@ -27,6 +27,7 @@
             width: 100%;
         }
 
+        /* DISEÑO FLUÍDO CON DEGRADADOS */
         .bg-lux {
             background: radial-gradient(circle at 50% -10%, var(--vino-base) 0%, transparent 50%),
                         radial-gradient(circle at 10% 40%, var(--vino-profundo) 0%, transparent 40%),
@@ -36,6 +37,7 @@
 
         .font-name { font-family: 'Playfair Display', serif; }
         
+        /* FUENTE CURSIVA PROTEGIDA PARA MÓVIL */
         .font-cursive { 
             font-family: 'Great Vibes', cursive; 
             line-height: 1.2 !important;
@@ -45,17 +47,17 @@
             word-break: break-word;
         }
 
-        /* GLITTER OPTIMIZADO PARA MÓVIL */
+        /* GLITTER OPTIMIZADO (Menor carga de CPU) */
         .glitter-container {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 1;
         }
         .glitter-layer {
             position: absolute; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Ccircle cx='10' cy='10' r='1' fill='%23FFDF73' opacity='0.4'/%3E%3Ccircle cx='150' cy='50' r='0.8' fill='%23ffffff' opacity='0.3'/%3E%3Ccircle cx='80' cy='180' r='1.2' fill='%23D4AF37' opacity='0.5'/%3E%3C/svg%3E");
-            animation: moveGlitter 30s linear infinite;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Ccircle cx='10' cy='10' r='0.8' fill='%23FFDF73' opacity='0.3'/%3E%3Ccircle cx='100' cy='40' r='0.5' fill='%23ffffff' opacity='0.2'/%3E%3Ccircle cx='50' cy='120' r='1' fill='%23D4AF37' opacity='0.4'/%3E%3C/svg%3E");
+            animation: moveGlitter 40s linear infinite;
         }
-        @keyframes moveGlitter { from { transform: translateY(0); } to { transform: translateY(-200px); } }
+        @keyframes moveGlitter { from { transform: translateY(0); } to { transform: translateY(-150px); } }
 
         .shimmer {
             background: linear-gradient(90deg, var(--dorado) 0%, var(--dorado-brillante) 50%, var(--dorado) 100%);
@@ -68,18 +70,18 @@
 
         .liquid-glass {
             background: rgba(91, 14, 35, 0.15);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(212, 175, 55, 0.2);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             border-radius: 24px;
         }
 
-        /* SOBRE RESPONSIVO */
+        /* SOBRE RESPONSIVO - FONDO BLANCO PERLA */
         #opening-overlay { background-color: var(--blanco-perla); z-index: 100; }
         #envelope-wrapper { perspective: 1200px; width: 100%; display: flex; justify-content: center; }
         #envelope {
-            width: 300px; max-width: 90vw; height: 200px; 
+            width: 300px; max-width: 85vw; height: 200px; 
             background: var(--vino-profundo);
             position: relative;
             box-shadow: 0 20px 50px rgba(0,0,0,0.15), inset 0 0 30px rgba(0,0,0,0.5); 
@@ -92,7 +94,7 @@
             border-left: 150px solid transparent; border-right: 150px solid transparent;
             border-top: 100px solid var(--vino-base); 
             transform-origin: top;
-            transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1); z-index: 3;
+            transition: transform 1s cubic-bezier(0.4, 0, 0.2, 1); z-index: 3;
         }
         @media (max-width: 350px) {
             #envelope { width: 260px; height: 180px; }
@@ -112,8 +114,7 @@
         .premium-divider {
             width: 1px; height: 60px;
             background: linear-gradient(to bottom, transparent, var(--dorado), transparent);
-            margin: 2rem auto;
-            opacity: 0.5;
+            margin: 2rem auto; opacity: 0.5;
         }
 
         .input-premium {
@@ -121,12 +122,17 @@
             padding: 0.8rem 0; width: 100%; color: var(--dorado-light); outline: none; text-align: center;
             border-radius: 0; -webkit-appearance: none;
         }
+        
+        .image-mask {
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+        }
     </style>
 </head>
 <body>
 
     <div class="glitter-container"><div class="glitter-layer"></div></div>
-    <audio id="invite-music" loop><source src="assets/song.mp3" type="audio/mpeg"></audio>
+    <audio id="invite-music" loop preload="auto"><source src="assets/song.mp3" type="audio/mpeg"></audio>
 
     <div id="opening-overlay" class="fixed inset-0 flex flex-col items-center justify-center transition-opacity duration-1000">
         <div id="envelope-wrapper">
@@ -138,7 +144,7 @@
                 </div>
             </div>
         </div>
-        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-16 px-10 py-4 bg-transparent text-[--vino-profundo] border border-[--vino-profundo] rounded-full font-bold tracking-[0.3em] text-[10px] active:scale-95 transition-all">
+        <button onclick="iniciarApertura()" id="btn-abrir" class="mt-16 px-10 py-4 bg-transparent text-[--vino-profundo] border border-[--vino-profundo] rounded-full font-bold tracking-[0.4em] text-[10px] active:scale-95 transition-all">
             ABRIR INVITACIÓN
         </button>
     </div>
@@ -150,7 +156,7 @@
                 <img src="assets/hero.jpg" alt="Arely Sarai" class="w-full h-full object-cover opacity-60">
                 <div class="absolute inset-0 bg-gradient-to-t from-[--vino-negro] via-transparent to-transparent"></div>
             </div>
-            <div class="relative text-center px-4 w-full overflow-hidden">
+            <div class="relative text-center px-4 w-full">
                 <p class="font-cursive text-4xl md:text-6xl text-[--dorado-light]">Mis XV Años</p>
                 <h1 class="font-cursive text-6xl sm:text-8xl md:text-[10rem] shimmer -mt-2">Arely Sarai</h1>
             </div>
@@ -159,19 +165,19 @@
         <div class="max-w-4xl mx-auto px-6">
             
             <section class="py-10 flex justify-center gap-4 md:gap-16">
-                <div class="text-center min-w-[60px]">
+                <div class="text-center min-w-[50px]">
                     <span id="days" class="font-name text-3xl md:text-6xl shimmer">00</span>
                     <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Días</p>
                 </div>
-                <div class="text-center min-w-[60px]">
+                <div class="text-center min-w-[50px]">
                     <span id="hours" class="font-name text-3xl md:text-6xl shimmer">00</span>
                     <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Hrs</p>
                 </div>
-                <div class="text-center min-w-[60px]">
+                <div class="text-center min-w-[50px]">
                     <span id="minutes" class="font-name text-3xl md:text-6xl shimmer">00</span>
                     <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Min</p>
                 </div>
-                <div class="text-center min-w-[60px]">
+                <div class="text-center min-w-[50px]">
                     <span id="seconds" class="font-name text-3xl md:text-6xl shimmer">00</span>
                     <p class="text-[8px] uppercase tracking-[0.3em] mt-1 opacity-60">Seg</p>
                 </div>
@@ -208,18 +214,18 @@
 
             <section class="py-10">
                 <div class="liquid-glass overflow-hidden">
-                    <img src="assets/salon.jpg" alt="Samsara" class="w-full h-64 object-cover opacity-80" style="-webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); mask-image: linear-gradient(to bottom, black 70%, transparent 100%);">
+                    <img src="assets/salon.jpg" alt="Samsara" class="w-full h-64 object-cover opacity-80 image-mask" loading="lazy">
                     <div class="p-8 md:p-12 text-center">
                         <h2 class="font-name text-4xl md:text-5xl shimmer mb-6">Recepción</h2>
                         <div class="inline-block border border-[--dorado] px-6 py-2 rounded-full mb-6">
                             <span class="tracking-[0.3em] text-[10px] font-bold">18:30 HRS</span>
                         </div>
                         <h3 class="text-lg tracking-[0.2em] uppercase mb-4 text-[--dorado]">Salón Samsara</h3>
-                        <p class="text-xs font-light leading-relaxed opacity-70 mb-10 px-4">
+                        <p class="text-xs font-light leading-relaxed opacity-70 mb-10">
                             Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, <br> 04300 Ciudad de México, CDMX
                         </p>
                         <div class="flex flex-col gap-4 items-center">
-                            <a href="https://share.google/czKc1hNzaSql5bSY1" target="_blank" class="w-full max-w-[250px] bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase">Ver Ubicación</a>
+                            <a href="https://share.google/czKc1hNzaSql5bSY1" target="_blank" class="w-full max-w-[250px] bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase shadow-lg">Ver Ubicación</a>
                             <button onclick="copyAddress()" class="w-full max-w-[250px] px-6 py-3 border border-[--dorado] rounded-full text-[9px] tracking-widest uppercase">Copiar Dirección</button>
                         </div>
                     </div>
@@ -228,8 +234,8 @@
 
             <section class="py-16 text-center">
                 <h2 class="font-name text-2xl shimmer mb-4 uppercase tracking-widest">Código de Vestimenta</h2>
-                <p class="uppercase tracking-[0.5em] text-xs font-bold mb-3 text-white">Formal</p>
-                <p class="italic text-[11px] opacity-60 px-6">Se reserva el color vino para la quinceañera.</p>
+                <p class="uppercase tracking-[0.5em] text-xs font-bold mb-3">Formal</p>
+                <p class="italic text-[11px] opacity-60">Se reserva el color vino para la quinceañera.</p>
             </section>
 
             <div class="premium-divider"></div>
@@ -239,7 +245,7 @@
                 <div class="flex flex-col gap-8 mb-16">
                     <div class="p-8 liquid-glass">
                         <h4 class="font-name text-xl mb-6">Mesa de Regalos</h4>
-                        <img src="assets/liverpool.png" alt="Liverpool" class="h-6 mx-auto mb-8 opacity-80 invert">
+                        <img src="assets/liverpool.png" alt="Liverpool" class="h-6 mx-auto mb-8 opacity-100" style="filter: none;">
                         <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/52001501" target="_blank" class="text-[9px] tracking-[0.3em] uppercase border-b border-[--dorado] pb-1">Ver Mesa</a>
                     </div>
                     <div class="p-8 liquid-glass">
@@ -267,7 +273,7 @@
                         <option value="Confirmado" class="bg-black">Sí, asistiré</option>
                         <option value="No asistirá" class="bg-black">No podré asistir</option>
                     </select>
-                    <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase shadow-lg">Enviar WhatsApp</button>
+                    <button onclick="procesarConfirmacion()" id="btn-rsvp" class="w-full bg-[--dorado] text-[--vino-negro] py-4 rounded-full font-bold tracking-[0.2em] text-[10px] uppercase shadow-lg active:scale-95 transition-transform">Enviar WhatsApp</button>
                 </div>
             </section>
 
@@ -275,7 +281,7 @@
                 <h2 class="font-name text-4xl shimmer mb-10">Muro de Deseos</h2>
                 <textarea id="muro-mensaje" placeholder="Escribe algo lindo..." class="input-premium mb-6 h-24 resize-none italic font-light"></textarea>
                 <input type="text" id="muro-nombre" placeholder="Tu nombre" class="input-premium mb-10">
-                <button onclick="enviarDeseo()" id="btn-muro" class="px-10 py-3 border border-[--dorado] rounded-full text-[9px] tracking-widest uppercase">Publicar</button>
+                <button onclick="enviarDeseo()" id="btn-muro" class="px-10 py-3 border border-[--dorado] rounded-full text-[9px] tracking-widest uppercase active:bg-dorado/10 transition-all">Publicar</button>
             </section>
 
             <footer class="py-16 opacity-20 text-[7px] tracking-[0.8em] uppercase text-center">
@@ -290,35 +296,34 @@
         const URL_SCRIPT = 'https://script.google.com/macros/s/AKfycbz1QlM9Ccy08OOlvHKtNVApC6i62uatapKWDkSFVt_sRRrDFPsx7KohDrLYfXbvLVUK0Q/exec';
 
         function copyAddress() {
-            const el = document.createElement('textarea');
-            el.value = "Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, 04300 Ciudad de México, CDMX";
-            document.body.appendChild(el);
-            el.select();
+            const temp = document.createElement('textarea');
+            temp.value = "Reyna Ixtlixóchitl 84, Ajusco, Coyoacán, 04300 Ciudad de México, CDMX";
+            document.body.appendChild(temp);
+            temp.select();
             document.execCommand('copy');
-            document.body.removeChild(el);
+            document.body.removeChild(temp);
             alert("Dirección copiada");
         }
 
         function iniciarApertura() {
+            const overlay = document.getElementById('opening-overlay');
+            const main = document.getElementById('main-content');
+            
             document.getElementById('envelope-wrapper').classList.add('open');
             document.getElementById('btn-abrir').style.opacity = '0';
             
-            audio.play().catch(e => console.log("Audio deferred"));
-            
+            audio.play().catch(() => {});
+
             setTimeout(() => {
-                const overlay = document.getElementById('opening-overlay');
-                const main = document.getElementById('main-content');
-                
                 overlay.style.opacity = '0';
                 main.classList.remove('hidden');
-                
                 setTimeout(() => {
                     overlay.style.display = 'none';
                     main.style.opacity = '1';
                     document.body.style.overflowY = 'auto';
                     startCountdown();
                 }, 800);
-            }, 1200);
+            }, 1000);
         }
 
         async function procesarConfirmacion() {
@@ -328,7 +333,7 @@
             try {
                 await fetch(URL_SCRIPT, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ tipo: 'confirmacion', nombre, asistencia }) });
                 window.open(`https://wa.me/525540603988?text=${encodeURIComponent('¡Hola Arely Sarai! Confirmo mi asistencia: ' + nombre + '. Estado: ' + asistencia)}`, '_blank');
-            } catch (e) { alert("Error"); }
+            } catch (e) {}
         }
 
         async function enviarDeseo() {
@@ -340,7 +345,7 @@
                 alert("¡Publicado!");
                 document.getElementById('muro-mensaje').value = "";
                 document.getElementById('muro-nombre').value = "";
-            } catch (e) { alert("Error"); }
+            } catch (e) {}
         }
 
         function startCountdown() {
